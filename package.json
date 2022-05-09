@@ -1,0 +1,14 @@
+{
+  "name": "wellgame",
+  "version": "1.0.0",
+  "description": "CL game about a well",
+  "main": "well.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
