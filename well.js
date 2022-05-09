@@ -43,7 +43,8 @@ const spider=(hp) => {
         key=true;
         rope(hp);
     } else {
-        say(`You can't do ${next} here.`);
+        say(`You can't ${next} here.`);
+        say("You can 'go back' or 'kill spider'")
         spider(hp);
     }
 
@@ -63,8 +64,9 @@ const rope=(hp) => {
         say("You approach the tunnel.");
         spider(hp); 
     } else {
-        say(`You can't do ${next} here.`);
-        well(hp);
+        say(`You can't ${next} here.`);
+        say("You can 'climb' up the rope, 'door' to try the door, or 'tunnel' to look in the spider webs.")
+        rope(hp);
     }
 }
 
@@ -81,7 +83,8 @@ const well=(hp) => {
         hp=Math.floor(hp/2);
         rope(hp);
     } else {
-        say(`You can't do ${next} here.`);
+        say(`You can't ${next} here.`);
+        say("You can either 'jump' or 'climb' down the rope.")
         well(hp);
     }
 }
