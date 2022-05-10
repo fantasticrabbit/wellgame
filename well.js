@@ -19,7 +19,7 @@ const ask=(mydude, prompt) => {
 }
 
 const win=(mydude) => {
-    if (mydude.hp=10 && mydude.lighter) {
+    if (mydude.hp===10 && mydude.lighter) {
         die("Perfect game, someone must have told you how this works, eh?")
     } else if (mydude.hp>4) {
         die("Not bad, you made it out alive, with plenty of gold to pay for your hospital bills.");
@@ -27,7 +27,7 @@ const win=(mydude) => {
         die("Phew, you made it! At least you're alive, the gold may even prevent you from going bankrupt after you treat your injuries!  Probably...")
 }
 const door=(mydude) => {
-    say("You are looking at a locked door.")
+    say("\n\nYou are looking at a locked door.")
     if (mydude.key===true) {
         say("You use the key to open the door and discover a bag of gold!")
         win(mydude)
@@ -38,7 +38,7 @@ const door=(mydude) => {
 }
 
 const tunnel=(mydude) => {
-    say(`You crawl through the tunnel wiping ${cobwebs} out of your way.`);
+    say(`\n\nYou crawl through the tunnel wiping ${cobwebs} out of your way.`);
     if (!spider && mydude.key===false) {
         say("You find a key!");
         mydude.key=true;
@@ -67,8 +67,8 @@ const tunnel=(mydude) => {
 }
 
 const rope=(mydude) => {
-    say("You are now at the bottom of the well.");
-    say(`There is a door to your left, and a tunnel covered in ${cobwebs} to your right.`)
+    say("\n\nYou are now at the bottom of the well.");
+    say(`There is a door to your left, and a tunnel covered in ${cobwebs} to your right.\n`)
     let next=ask(mydude, "What do you do?");
     if(next==="climb up") {
         say("You climb back up the rope");
@@ -94,7 +94,7 @@ const rope=(mydude) => {
         rope(mydude)
     } else {
         say(`You can't ${next} here.`);
-        say("You can 'climb up' the rope, 'goto door' to try the door, or 'goto tunnel' to look in the spider webs.")
+        say("You can 'climb up' the rope, 'goto door' to try the door, or 'goto tunnel' to look in the spider webs.\n\nOr you could 'look around'...")
         if (mydude.lighter && !mydude.key) {
             say("You could also try to 'burn cobwebs' in the tunnel")
         }
@@ -103,8 +103,8 @@ const rope=(mydude) => {
 }
 
 const well=(mydude) => {
-    say("You are walking through the woods and see a well with a rope hanging down.");
-    say("Walking up to it and looking down you see a shiny thing at the bottom.");
+    say("\n\nYou are walking through the woods and see a well with a rope hanging down.");
+    say("Walking up to it and looking down you see a shiny thing at the bottom.\n");
     let next=ask(mydude, "What do you do?");
 
     if(next==="climb down") {
