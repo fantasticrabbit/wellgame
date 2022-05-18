@@ -70,7 +70,7 @@ class Gold extends Room {
 
 class Door extends Room {
     enter() {
-        say("\n\nYou are looking at a locked door.")
+        say("You are looking at a locked door.")
         if (this.game.key===true) {
             say("You use the key to open the door and discover a bag of gold!")
             this.game.gold.enter()
@@ -83,7 +83,7 @@ class Door extends Room {
 
 class Tunnel extends Room {
   enter() {
-    say(`\n\nYou crawl through the tunnel wiping ${this.game.cobwebs} out of your way.`);
+    say(`You crawl through the tunnel wiping ${this.game.cobwebs} out of your way.`);
     if (!this.game.spider && this.game.key===false) {
         say("You find a key!");
         this.game.key=true;
@@ -114,36 +114,38 @@ class Tunnel extends Room {
 
 class Rope extends Room {
   enter() {
-    say("\n\nYou are now at the bottom of the well.");
+    say("You are now at the bottom of the well.");
     say(`There is a door to your left, and a tunnel covered in ${this.game.cobwebs} to your right.\n`)
     let next=this.game.ask("What do you do?");
     if(next==="climb up") {
-        say("You climb back up the rope");
+        say("*****\n\nYou climb back up the rope");
         this.game.well.enter();
     } else if(next==="goto door") {
-        say("You approach the door.");
+        say("*****\n\nYou approach the door.");
         this.game.door.enter();
     } else if(next==="goto tunnel") {
-        say("You approach the tunnel.");
+        say("*****\n\nYou approach the tunnel.");
         this.game.tunnel.enter();
     } else if(next==="look around" && this.game.lighter===false) {
-        say("You found a butane lighter.  <chk-chk> And it works!")
+        say("*****\n\nYou found a butane lighter.  <chk-chk> And it works!")
         this.game.lighter=true
         this.game.rope.enter();
     } else if(next==="burn cobwebs" && this.game.lighter===false) {
-        say("You need a butane lighter, silly.")
+        say("*****\n\nYou need a butane lighter, silly.")
         this.game.rope.enter();
     } else if(next==="burn cobwebs" && this.game.lighter===true) {
-        say("You burn the cobwebs in the tunnel. A small spider crawls out.")
+        say("*****\n\nYou burn the cobwebs in the tunnel. A small spider crawls out.")
         say("You squash the spider with your foot.")
         this.game.spider=false
         this.game.cobwebs="ashes"
         this.game.rope.enter();
     } else {
-        say(`You can't ${next} here.`);
-        say("You can 'climb up' the rope, 'goto door' to try the door, or 'goto tunnel' to look in the spider webs.\n\nOr you could 'look around'...")
+        say(`*****\n\nYou can't ${next} here.`);
+        say("You can 'climb up' the rope, 'goto door' to try the door, or 'goto tunnel' to look in the spider webs.")
         if (this.game.lighter && !this.game.key) {
-            say("You could also try to 'burn cobwebs' in the tunnel")
+            say("\nYou could also try to 'burn cobwebs' in the tunnel\n")
+        } else if (!this.game.lighter && !this.game.key) {
+            say("\nOr you could 'look around'...\n");
         }
         this.game.rope.enter();
     }
@@ -153,19 +155,19 @@ class Rope extends Room {
 class Well extends Room {
 
   enter() {
-    say("\nYou are walking through the woods and see a well.");
+    say("You are walking through the woods and see a well.");
     say("Walking up to it and looking down you see a shiny thing at the bottom.\n");
     let next = this.game.ask("What do you do?");
 
     if(next === "climb down") {
-        say("You climb down the rope.\n");
+        say("*****\n\nYou climb down the rope.\n");
         this.game.rope.enter();
     } else if(next === "jump in") {
-        say("Yikes! That's going to leave a mark!\n");
+        say("*****\n\nYikes! That's going to leave a mark!\n");
         this.game.hit(5);
         this.game.rope.enter();
     } else {
-        say(`You can't ${next} here.`);
+        say(`*****\n\nYou can't ${next} here.`);
         say("You can 'climb down' or 'jump in'")
         this.game.well.enter();
     }
@@ -179,4 +181,5 @@ let game = new Game(
     new Tunnel('tunnel'),
     new Door('door')]);
 
+say('*****\n\n');
 game.play("well");
